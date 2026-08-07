@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -12,9 +13,12 @@ using namespace std;
 using namespace chrono;
 
 int main() {
+    string input;
+
     int n;
-    cout << "Enter matrix dimension: n = ";
-    cin >> n;
+    cout << "Enter matrix dimension (default = 4096): n = ";
+    getline(std::cin, input);
+    n = input.empty() ? 4096 : stoi(input);
 
     if (n <= 0) {
         cerr << "Error: n must be positive\n";
@@ -49,8 +53,11 @@ int main() {
         warm, warm, warm,
         1.0, A, n, B, n, 0.0, C, n);
 
-    const int iterations = 5;
-    double times[iterations];
+    int iterations;
+    cout << "Enter number of iterations (default = 5): n = ";
+    getline(std::cin, input);
+    iterations = input.empty() ? 5 : stoi(input);
+    vector<double> times(iterations);
 
     cout << "\nBenchmarking (" << iterations << " iterations):\n";
     cout << "========================================\n";
@@ -74,7 +81,7 @@ int main() {
             << (2.0 * n * n * n / 1e9) / times[i] << " GFLOPS)\n";
     }
 
-    sort(times, times + iterations);
+    sort(times.begin(), times.end());
 
     double median_time = times[iterations / 2];
     double best_time = times[0];
