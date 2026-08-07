@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -6,6 +5,7 @@
 #include <cstdlib>
 
 // 1. Apple Native Vector Math/BLAS Header
+#define ACCELERATE_NEW_LAPACK
 #include <Accelerate/Accelerate.h>
 
 using namespace std;
